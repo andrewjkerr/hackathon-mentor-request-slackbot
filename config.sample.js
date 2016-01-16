@@ -1,9 +1,11 @@
 module.exports = {
-  api_token: 'xxx',
-  bot_name: 'pingbot',
-  bot_trigger: '.ping',
+  api_token: 'xoxp-xxx',
+  bot_name: 'mentor_request',
+  bot_trigger: '.mentor',
+  admins: ['bernie'],
+  mentors: ['bernie', 'andrew'],
   teams : {
-    security: ['andrew', 'jill'],
-    product: ['jane', 'john']
+    ruby: ['andrew'],
+    javascript: ['bernie']
   }
 }
