@@ -92,15 +92,7 @@ function assign_mentor(assigned_mentor, assigned_to_obj, keyword, issue, where) 
   if (!assigned_mentor_obj) {
     slack_functions.say('That mentor doesn\'t exist!', where);
   } else {
-    group_name = utils.generateChannelName(assigned_to_obj, keyword);
-    slack.createGroup(group_name, function(assigned_mentor_obj, assigned_to_obj){
-      // Currently borked? Dunno why.
-      group_obj = slack.getChannelGroupOrDMByName(group_name);
-      invite_user(assigned_mentor_obj, group_obj);
-      invite_user(assigned_to_obj, group_obj);
-    });
-
-    slack_functions.say('Ok, @' + assigned_mentor_obj.name + ' you\'re up! Make sure to `.mentor done` when you are done.', where);
+    slack_functions.say('Ok, @' + assigned_mentor_obj.name + ' you\'re up! Please DM ' + assigned_to_obj.name + ' and make sure to `.mentor done` when you are done.', where);
     var index = available.indexOf(assigned_mentor);
     if (index > -1) {
         available.splice(index, 1);
