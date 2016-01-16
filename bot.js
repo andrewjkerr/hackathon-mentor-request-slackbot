@@ -41,6 +41,7 @@ var teams = config.teams;
 
 // TO-DO: Make this automatically generated
 var available = config.mentors;
+var mentors = config.mentors.slice(0);
 
 // init new instance of the slack real time client
 var slack = new slack_client(config.api_token);
@@ -188,32 +189,24 @@ function invite_user(user, where) {
 }
 
 function finish_mentoring(user_obj, where) {
-  available.push(user_obj.name);
-  slack_functions.say('Thanks! The follow mentors are now available: ' + available.join(', ') + '.', where);
-}
-
-function process_member_add(text, where) {
-  text = strip_text(text, 'add');
-  text_arr = text.split(' ');
-  team = text_arr[0];
-  member = text_arr[1];
-  add_member(team, member, where);
-}
-
-function add_member(team, member, where) {
-  user = slack.getUserByName(text_arr[1]);
-
-  if (user) {
-    if (team[team]) {
-      teams[team].push(member);
+  if (is_username_mentor(user_obj.name)) {
+    if (!is_mentor_is_available(user_obj.name)) {
+      available.push(user_obj.name);
+      slack_functions.say('Thanks! The follow mentors are now available: ' + available.join(', ') + '.', where);
     } else {
-      teams[team] = [member];
+      slack_functions.say('Whoops, you\'re already marked as available!', where);
     }
-
-    slack_functions.say(member + ' was successfully added to ' + team + '!', where);
   } else {
-    slack_functions.say('That user doesn\'t exist!', where);
+    slack_functions.say('Whoops, you\'re not registered as a mentor!', where);
   }
+}
+
+function is_username_mentor(username) {
+  return mentors.indexOf(username) != -1;
+}
+
+function is_mentor_is_available(username) {
+  return available.indexOf(username) != -1;
 }
 
 // actually log in and connect!
