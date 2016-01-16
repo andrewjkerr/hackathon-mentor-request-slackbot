@@ -11,3 +11,7 @@ exports.getRandomInt = function (min, max) {
 exports.generateChannelName = function (assigned_to_obj, keyword) {
   return assigned_to_obj.name + '_' + keyword + '_' + Math.random().toString(36).substring(5);
 }
+
+exports.strip_text = function (text, to_strip) {
+  return text.replace(to_strip + ' ', '');
+}
