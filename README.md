@@ -1,6 +1,12 @@
 # Mentor Request for Slack
 
-A slackbot to help SwampHacks manage mentorship requests during their hackathon.
+A slackbot to help hackathons manage mentorship requests during their hackathon. Written during KnightHacks from Jan 15, 2016 - Jan 16, 2016.
+
+## Usage
+
+### Normal User
+
+Want help with something?
 
 ## Installation
 
@@ -34,7 +40,3 @@ You can also use this with Docker! Update the `Dockerfile` with your email addre
     docker run -d your-name/mentor-request-bot
 
 Nice.
-
-## Usage
-
-¯\\\_(ツ)\_/¯
