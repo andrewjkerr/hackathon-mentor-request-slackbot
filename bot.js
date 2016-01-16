@@ -21,6 +21,7 @@ var config = require(config_file);
 global.bot_name = config.bot_name;
 global.bot_trigger = config.bot_trigger;
 global.teams = config.teams;
+global.admins = config.admins;
 
 // TO-DO - make this automatically generated from teams
 global.available = config.mentors;

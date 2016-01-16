@@ -23,6 +23,10 @@ function process_team_message(team, message_obj) {
     list_keywords(where);
   } else if (team.lastIndexOf('available', 0) === 0) {
     list_available_mentors(where);
+  } else if (team.lastIndexOf('add', 0) === 0) {
+    process_member_add(team, where, from);
+  } else if (team.lastIndexOf('delete', 0) === 0) {
+    process_member_delete(team, where, from);
   } else if (team.lastIndexOf('done', 0) === 0) {
     finish_mentoring(from, where);
   } else if (team === bot_trigger) {
@@ -121,6 +125,93 @@ function is_username_mentor(username) {
   return mentors.indexOf(username) != -1;
 }
 
+function is_username_admin(username) {
+  return admins.indexOf(username) != -1;
+}
+
 function is_mentor_is_available(username) {
   return available.indexOf(username) != -1;
+}
+
+function process_member_add(text, where, from) {
+  if (!is_username_admin(from.name)) {
+    slack_functions.say('Whoops, you\'re not an admin!', where);
+    return;
+  }
+  
+  text = utils.strip_text(text, 'add');
+  text_arr = text.split(' ');
+  team = text_arr[0];
+  member = text_arr[1];
+  add_member(team, member, where);
+}
+
+function add_member(team, member, where) {
+  user = slack.getUserByName(text_arr[1]);
+
+  if (user) {
+    if (teams[team]) {
+      teams[team].push(member);
+    } else {
+      teams[team] = [member];
+    }
+
+    slack_functions.say(member + ' was successfully added to ' + team + '!', where);
+  } else {
+    slack_functions.say('That user doesn\'t exist!', where);
+  }
+}
+
+function process_member_delete(text, where, from) {
+  if (!is_username_admin(from.name)) {
+    slack_functions.say('Whoops, you\'re not an admin!', where);
+    return;
+  }
+
+  text = utils.strip_text(text, 'delete');
+  text_arr = text.split(' ');
+  team = text_arr[0];
+  member = text_arr[1];
+  delete_member(team, member, where);
+}
+
+function delete_member(team, member, where) {
+  user = slack.getUserByName(member);
+
+  if (user) {
+    if (team.toUpperCase() === 'ALL') {
+      var index = available.indexOf(member);
+      if (index > -1) {
+          available.splice(index, 1);
+      }
+
+      index = mentors.indexOf(member);
+      if (index > -1) {
+          mentors.splice(index, 1);
+      }
+
+      Object.keys(teams).forEach(function (key) {
+        var value = teams[key];
+
+        index = value.indexOf(member);
+        if (index > -1) {
+            value.splice(index, 1);
+        }
+      });
+
+      slack_functions.say(member + ' has been deleted from everything', where);
+    } else {
+      if (teams[team]) {
+        var index = teams[team].indexOf(member);
+        if (index > -1) {
+            teams[team].splice(index, 1);
+        }
+        slack_functions.say(member + ' has been deleted from ' + team, where);
+      } else {
+        slack_functions.say('Whoops, that team doesn\'t exist!', where);
+      }
+    }
+  } else {
+    slack_functions.say('That user doesn\'t exist!', where);
+  }
 }
