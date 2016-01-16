@@ -46,7 +46,7 @@ function list_available_mentors(where) {
 }
 
 function display_help(where, from) {
-  slack_functions.say('Hey @' + from.name + '! Here are a list of commands: \'keywords\' and \'available\'. When you\'re ready, use `.mentor {keyword} {issue}` to open a new mentor request.', where);
+  slack_functions.say('Hey @' + from.name + '! Here are a list of commands: \'keywords\' and \'available\'. When you\'re ready, use `.mentor {keyword} {issue}` to open a new mentor request. For more detailed help, please visit https://github.com/andrewjkerr/hackathon-mentor-request-slackbot#attendees!', where);
 }
 
 function mentor_request(text, where, from) {
