@@ -1,6 +1,6 @@
-# PINGBOT for Slack
+# Mentor Request for Slack
 
-![PINGBOT](https://i.imgur.com/sc8XvQu.png)
+A slackbot to help SwampHacks manage mentorship requests during their hackathon.
 
 ## Installation
 
@@ -24,17 +24,17 @@ Rename `config.sample.js` to `config.js` and edit it with your own config.
 
 Run `node /path/to/bot.js /path/to/config.js` to get it running.
 
-Invite pingbot to your channel!
+Invite mentor_request_bot to your channel!
 
 ### ... or with Docker
 
 You can also use this with Docker! Update the `Dockerfile` with your email address.
 
-    docker build -t your-name/pingbot .
-    docker run -d your-name/pingbot
+    docker build -t your-name/mentor-request-bot .
+    docker run -d your-name/mentor-request-bot
 
 Nice.
 
 ## Usage
 
-Update the `config.js` file with your teams and then use `.ping team` to ping all of the members on that team!
+¯\\\_(ツ)\_/¯
