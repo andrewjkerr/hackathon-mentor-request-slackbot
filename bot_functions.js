@@ -107,7 +107,7 @@ function assign_mentor(assigned_mentor, assigned_to_obj, keyword, issue, where) 
       invite_user(assigned_to_obj, group);
 
       slack._apiCall('groups.setTopic', { channel: group_id, topic: issue }, function(data) {
-        slack_functions.say('Ok, @' + assigned_mentor_obj.name + ' you\'re up! Please DM ' + assigned_to_obj.name + ' and make sure to `.mentor done` when you are done.', where);
+        slack_functions.say('Ok, @' + assigned_mentor_obj.name + ' you\'re up! Please join the new group and make sure to `.mentor done` when you are done.', where);
 
         var index = available.indexOf(assigned_mentor);
         if (index > -1) {
