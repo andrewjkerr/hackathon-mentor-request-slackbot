@@ -170,6 +170,9 @@ function add_member(team, member, where) {
       teams[team] = [member];
     }
 
+    available.push(member);
+    mentors.push(member);
+    
     slack_functions.say(member + ' was successfully added to ' + team + '!', where);
   } else {
     slack_functions.say('That user doesn\'t exist!', where);
