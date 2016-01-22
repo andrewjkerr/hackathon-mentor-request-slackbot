@@ -30,6 +30,8 @@ function process_team_message(team, message_obj) {
     process_member_delete(team, where, from);
   } else if (team.lastIndexOf('done', 0) === 0) {
     finish_mentoring(from, where);
+  } else if (team.lastIndexOf('away', 0) === 0) {
+    mentor_busy(from, where);
   } else if (team === bot_trigger) {
     display_help(where, from);
   } else {
@@ -120,6 +122,22 @@ function assign_mentor(assigned_mentor, assigned_to_obj, keyword, issue, where) 
 
 function invite_user(user, where) {
   where.invite(user.id);
+}
+
+function mentor_busy(user_obj, where) {
+  if (is_username_mentor(user_obj.name)) {
+    if (is_mentor_is_available(user_obj.name)) {
+      var index = available.indexOf(user_obj.name);
+      if (index > -1) {
+          available.splice(index, 1);
+      }
+      slack_functions.say('You\'ve been set to away!', where);
+    } else {
+      slack_functions.say('Whoops, you\'re already marked as unavailable!', where);
+    }
+  } else {
+    slack_functions.say('Whoops, you\'re not registered as a mentor!', where);
+  }
 }
 
 function finish_mentoring(user_obj, where) {

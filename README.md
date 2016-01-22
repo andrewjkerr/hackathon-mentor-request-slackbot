@@ -40,6 +40,10 @@ Examples of this command can be:
 
 Once you are available again (either by resolving an issue OR passing off the issue), put yourself back in the queue with this command.
 
+#### `.mentor away`
+
+Need to take a break? Use `.mentor away` to remove yourself from the available mentor list.
+
 ### Admins
 
 #### `.mentor add {keyword} {username}`
