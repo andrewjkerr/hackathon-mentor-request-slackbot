@@ -1,5 +1,7 @@
 # Mentor Request for Slack
 
+![swamphacks_logo](https://i.imgur.com/ERqvgGI.png)
+
 A slackbot to help hackathons manage mentorship requests during their hackathon. Written during KnightHacks from Jan 15, 2016 - Jan 16, 2016.
 
 ## Usage
