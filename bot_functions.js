@@ -188,8 +188,11 @@ function add_member(team, member, where) {
       teams[team] = [member];
     }
 
-    available.push(member);
-    mentors.push(member);
+    var index = mentors.indexOf(member);
+    if (index <= -1) {
+      available.push(member);
+      mentors.push(member);
+    }
     
     slack_functions.say(member + ' was successfully added to ' + team + '!', where);
   } else {
